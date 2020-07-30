@@ -1,0 +1,32 @@
+object scala_5_Q_4 extends App{
+
+var bank: List[Account] = List()
+
+  bank = b +: bank
+  bank = c +: bank
+
+  val find = (n: String, b: List[Account]) => b.filter(x=>x.nic.equals(n))
+
+  //Question 4.1
+
+  val overdraft = (b: List[Account]) => b.filter(x=>x.balance.<(0))
+
+  println("List of accounts with negative balances -> " + overdraft(bank))
+  println()
+
+  //Question 4.2
+
+  val bal = (b: List[Account]) => b.reduce((x, y)=>new Account(x.nic,x.accNumber,x.balance+y.balance))
+
+  println("Total balance of all accounts -> " + bal(bank).balance)
+  println()
+
+  //Question 4.3
+
+  val depInterest=(b: List[Account]) => b.filter(x=>x.balance.>(0)).map(x=>x.balance*1005/1000)
+  val overInterest=(b: List[Account]) => b.filter(x=>x.balance.<(0)).map(x=>x.balance*1010/1000)
+
+  println("After applying deposit interests -> " + depInterest(bank))
+  println("After applying overdraft interests -> " + overInterest(bank))
+
+}
